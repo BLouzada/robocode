@@ -3,16 +3,15 @@ package ubots;
 import java.awt.Color;
 import java.util.Random;
 
-import robocode.AdvancedRobot;
-import robocode.RobotDeathEvent;
-import robocode.ScannedRobotEvent;
+import robocode.*;
 
 public class MambaNegra extends AdvancedRobot {
 
 	private EnemyInfo enemy = new EnemyInfo();
+	private byte moveDirection = 1;
 	private Radar radar = new Radar(this, enemy);
 	private Cannon gun = new Cannon(this, enemy);
-	private BasicMovement movement = new BasicMovement(this);
+	private BasicMovement movement = new BasicMovement();
 
 	public void run() {
 
@@ -50,17 +49,16 @@ public class MambaNegra extends AdvancedRobot {
 		return new Random().ints(0, 256).findAny().getAsInt();
 	}
 
-	private static class BasicMovement {
 
-		private AdvancedRobot robot;
+	public void onHitWall(HitWallEvent e) { moveDirection *= -1; }
 
-		public BasicMovement(AdvancedRobot robot) {
-			this.robot = robot;
-		}
+	public void onHitRobot(HitRobotEvent e) { moveDirection *= -1; }
+
+	private class BasicMovement {
 
 		public void move() {
-			robot.setTurnRight(-5);
-			robot.setAhead(-20);
+			setTurnRight(enemy.getBearing() + 90);
+			setAhead(100 * moveDirection);
 		}
 
 	}

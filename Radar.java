@@ -6,7 +6,7 @@ import robocode.ScannedRobotEvent;
 
 public class Radar {
 
-	private static final int TIMES_TO_SPIN = 100;
+	private static final int TIMES_TO_SPIN = 30;
 	private static final int ANGLE = 30;
 	private byte direction = 1;
 	private AdvancedRobot robot;
