@@ -57,8 +57,12 @@ public class MambaNegra extends AdvancedRobot {
 	private class BasicMovement {
 
 		public void move() {
-			setTurnRight(enemy.getBearing() + 90);
+			setTurnRight(enemy.getBearing() + 90 - (30 * moveDirection));
 			setAhead(100 * moveDirection);
+			if (getTime() % 20 == 0) {
+				moveDirection *= -1;
+				setAhead(150 * moveDirection);
+			}
 		}
 
 	}
