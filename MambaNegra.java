@@ -15,7 +15,11 @@ public class MambaNegra extends AdvancedRobot {
 
 	public void run() {
 
-		setColors(getRandomcolor(), getRandomcolor(), getRandomcolor());
+		setBodyColor(Color.BLACK);
+        setGunColor(Color.BLACK);
+        setRadarColor(Color.BLACK);
+        setBulletColor(Color.BLACK);
+        setScanColor(Color.BLACK);
 
 		enemy.reset();
 		radar.init();
@@ -40,15 +44,6 @@ public class MambaNegra extends AdvancedRobot {
 	public void onRobotDeath(RobotDeathEvent e) {
 		radar.onRobotDeath(e);
 	}
-
-	private Color getRandomcolor() {
-		return new Color(getRandomRgbColor(), getRandomRgbColor(), getRandomRgbColor());
-	}
-
-	private int getRandomRgbColor() {
-		return new Random().ints(0, 256).findAny().getAsInt();
-	}
-
 
 	public void onHitWall(HitWallEvent e) { moveDirection *= -1; }
 
